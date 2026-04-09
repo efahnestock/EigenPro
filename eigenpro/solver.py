@@ -122,7 +122,7 @@ def fit(model, X, Y, x, y, device, dtype=torch.float32, kernel=None,
                 torch.cuda.synchronize()
                 torch.cuda.empty_cache()
 
-            if ( (project_counter + 1) % T == 0 or (t==len(train_dataloader)-1) ) and accumulated_gradients:
+            if accumulated_gradients and T > 0 and ( (project_counter + 1) % T == 0 or (t==len(train_dataloader)-1) ):
 
                 if model_preconditioner is None:
                     # model preconditioner
